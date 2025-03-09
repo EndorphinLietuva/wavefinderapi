@@ -1,0 +1,29 @@
+# Default ignored directories
+node_modules/
+vendor/
+storage/
+bootstrap/cache/
+public/
+
+# Laravel-specific files
+.env
+.env.*
+.phpunit.result.cache
+
+# Build tools and package managers
+yarn.lock
+package-lock.json
+composer.lock
+composer.json
+
+# Database migrations and seeders (auto-generated)
+database/migrations/
+database/seeders/
+
+# IDE and editor configurations
+.idea/
+.vscode/
+
+# Minified or third-party assets
+*.min.js
+*.min.css
