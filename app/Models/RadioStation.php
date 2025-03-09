@@ -6,38 +6,37 @@ use Illuminate\Database\Eloquent\Model;
 
 class RadioStation extends Model
 {
-	protected $primaryKey = "stationuuid";
+	protected $primaryKey = "station_uuid";
 	public $incrementing = false;
 	protected $keyType = "string";
 
 	protected $fillable = [
-		"stationuuid",
-		"changeuuid",
-		"serveruuid",
+		"station_uuid",
+		"change_uuid",
+		"server_uuid",
 		"name",
 		"url",
 		"url_resolved",
-		"homepage",
+		"home_page",
 		"favicon",
 		"tags",
-		"country",
-		"countrycode",
+		"country_code",
 		"iso_3166_2",
 		"state",
 		"language",
-		"languagecodes",
+		"language_codes",
 		"votes",
-		"lastchangetime",
+		"last_change_time",
 		"codec",
 		"bitrate",
 		"hls",
-		"lastcheckok",
-		"lastchecktime",
-		"lastcheckoktime",
-		"lastlocalchecktime",
-		"clicktimestamp",
-		"clickcount",
-		"clicktrend",
+		"last_check_ok",
+		"last_check_time",
+		"last_check_ok_time",
+		"last_local_check_time",
+		"click_timestamp",
+		"click_count",
+		"click_trend",
 		"ssl_error",
 		"geo_lat",
 		"geo_long",
