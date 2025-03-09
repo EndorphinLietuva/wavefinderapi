@@ -104,7 +104,7 @@ class RadioFetchService
 			Log::error("Failed to fetch servers from the DNS API.", [
 				"exception" => $e
 			]);
-			return null;
+			throw $e;
 		}
 
 		if (empty($liveServers)) {
@@ -212,7 +212,6 @@ class RadioFetchService
 
 			$filtered = $this->processBatch($stations);
 			$this->insertBatch($filtered);
-			// dd($stations);
 			$processedCount = count($filtered);
 			$totalInserted += $processedCount;
 

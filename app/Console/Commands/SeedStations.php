@@ -25,7 +25,7 @@ class SeedStations extends Command
 		try {
 			// Settings
 			$chunkSize = config("app.debug") ? 10000 : 10000;
-			$limit = config("app.debug") ? 100 : 0;
+			$limit = config("app.debug") ? 0 : 0;
 
 			$totalStations = $this->radioFetchService->getTotalStations();
 			$typeOfLimit = $limit > 0 ? $limit : $totalStations;
