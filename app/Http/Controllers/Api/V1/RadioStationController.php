@@ -42,6 +42,14 @@ class RadioStationController extends Controller
 	}
 
 	/**
+	 * Show a random station.
+	 */
+	public function showRandom()
+	{
+		return new StationResource(RadioStation::inRandomOrder()->first());
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 */
 	public function edit(string $id)

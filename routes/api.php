@@ -9,17 +9,20 @@ use App\Http\Controllers\Api\V1\AuthController;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-Route::apiResource("stations", RadioStationController::class);
-
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "login"]);
 Route::middleware("auth:sanctum")->group(function () {
 	Route::post("/logout", [AuthController::class, "logout"]);
 });
 
+Route::get("stations/random", [RadioStationController::class, "showRandom"]);
 Route::group(
 	["prefix" => "v1", "namespace" => "App\Http\Controllers\Api\V1"],
 	function () {
+		Route::get("stations/random", [
+			RadioStationController::class,
+			"showRandom"
+		]);
 		Route::apiResource("stations", RadioStationController::class);
 	}
 );
