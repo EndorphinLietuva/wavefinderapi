@@ -34,7 +34,7 @@ class AuthController extends Controller
 		if (!$user || !password_verify($request->password, $user->password)) {
 			return [
 				"errors" => [
-					"email" => "The provided credentials are incorrect."
+					"email" => ["The provided credentials are incorrect."]
 				]
 			];
 		}
