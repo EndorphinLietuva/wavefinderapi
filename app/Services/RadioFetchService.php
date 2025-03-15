@@ -47,7 +47,7 @@ class RadioFetchService
 	public function getTotalStations()
 	{
 		if (!$this->checkDns()) {
-			return 0;
+			return [];
 		}
 		$response = $this->client->get(
 			Cache::get("radio.fastest_dns") . "/json/stats",
@@ -248,7 +248,7 @@ class RadioFetchService
 			DB::statement("TRUNCATE TABLE radio_stations_staging");
 
 			DB::commit();
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			DB::rollBack();
 			Log::error(
 				"Failed to copy data and rename tables: " . $e->getMessage()
@@ -335,7 +335,7 @@ class RadioFetchService
 			try {
 				DB::table("radio_stations_staging")->insert($station);
 				DB::commit();
-			} catch (\Exception $e) {
+			} catch (Exception $e) {
 				DB::rollBack();
 				Log::error("Batch insert failed: " . $e->getMessage());
 				throw $e;

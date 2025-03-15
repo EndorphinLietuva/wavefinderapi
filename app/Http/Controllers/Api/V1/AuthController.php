@@ -10,14 +10,20 @@ class AuthController extends Controller
 {
 	public function register(Request $request)
 	{
-		$fields = $request->validate([
-			"name" => "required|string|max:255",
-			"email" => "required|string|email|max:255|unique:users",
-			"password" => "required|string|min:8|confirmed"
-		]);
+		$fields = $request->validate(
+			[
+				"username" =>
+					"required|string|max:255|unique:users|regex:/^\S*$/u",
+				"email" => "required|string|email|max:255|unique:users",
+				"password" => "required|string|min:8|confirmed"
+			],
+			[
+				"username.regex" => "The username must not contain spaces."
+			]
+		);
 		// COULD BE UNSAFE, IDK
 		$user = User::create($fields);
-		$token = $user->createToken($request->name);
+		$token = $user->createToken($request->username);
 		return [
 			"user" => $user,
 			"token" => $token->plainTextToken

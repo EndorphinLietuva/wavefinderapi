@@ -15,7 +15,6 @@ Route::middleware("auth:sanctum")->group(function () {
 	Route::post("/logout", [AuthController::class, "logout"]);
 });
 
-Route::get("stations/random", [RadioStationController::class, "showRandom"]);
 Route::group(
 	["prefix" => "v1", "namespace" => "App\Http\Controllers\Api\V1"],
 	function () {
