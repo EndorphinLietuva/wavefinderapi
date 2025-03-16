@@ -9,11 +9,19 @@ Route::get("/user", function (Request $request) {
 	return $request->user();
 })->middleware("auth:sanctum");
 
-Route::post("/register", [AuthController::class, "register"]);
-Route::post("/login", [AuthController::class, "login"]);
-Route::middleware("auth:sanctum")->group(function () {
-	Route::post("/logout", [AuthController::class, "logout"]);
-});
+Route::middleware("throttle:10,1")->post("/register", [
+	AuthController::class,
+	"register"
+]);
+Route::middleware("throttle:10,1")->post("/login", [
+	AuthController::class,
+	"login"
+]);
+Route::middleware("throttle:10,1")
+	->middleware("auth:sanctum")
+	->group(function () {
+		Route::post("/logout", [AuthController::class, "logout"]);
+	});
 
 Route::group(
 	["prefix" => "v1", "namespace" => "App\Http\Controllers\Api\V1"],
