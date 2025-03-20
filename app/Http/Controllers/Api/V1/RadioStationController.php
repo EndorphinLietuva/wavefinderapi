@@ -14,7 +14,7 @@ class RadioStationController extends Controller
 	 */
 	public function index()
 	{
-		return new StationResource(RadioStation::all());
+		return StationResource::collection(RadioStation::paginate(10));
 	}
 
 	/**
