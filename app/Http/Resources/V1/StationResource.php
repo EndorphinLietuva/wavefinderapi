@@ -4,6 +4,7 @@ namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\FavoriteStationService;
 
 class StationResource extends JsonResource
 {
@@ -14,7 +15,7 @@ class StationResource extends JsonResource
 	 */
 	public function toArray(Request $request): array
 	{
-		return [
+		$data = [
 			"station_uuid" => $this->station_uuid,
 			"change_uuid" => $this->change_uuid,
 			"server_uuid" => $this->server_uuid,
@@ -49,5 +50,16 @@ class StationResource extends JsonResource
 			"created_at" => $this->created_at,
 			"updated_at" => $this->updated_at
 		];
+
+		// Add is_favorite if the user is authenticated
+		if ($request->user()) {
+			$favoriteService = app(FavoriteStationService::class);
+			$data["is_favorite"] = $favoriteService->isFavorite(
+				$request->user(),
+				$this->station_uuid
+			);
+		}
+
+		return $data;
 	}
 }

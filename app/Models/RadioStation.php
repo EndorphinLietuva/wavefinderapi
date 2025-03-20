@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class RadioStation extends Model
 {
@@ -43,4 +44,17 @@ class RadioStation extends Model
 		"geo_distance",
 		"has_extended_info"
 	];
+
+	/**
+	 * The users that have favorited this station.
+	 */
+	public function favoritedBy(): BelongsToMany
+	{
+		return $this->belongsToMany(
+			User::class,
+			"user_favorite_stations",
+			"station_uuid",
+			"user_id"
+		)->withTimestamps();
+	}
 }
